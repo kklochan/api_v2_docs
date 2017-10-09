@@ -200,4 +200,7 @@ public class CodegenConstants {
 
     public static final String REMOVE_OPERATION_ID_PREFIX = "removeOperationIdPrefix";
     public static final String REMOVE_OPERATION_ID_PREFIX_DESC = "Remove prefix of operationId, e.g. config_getId => getId";
+
+    public static final String WITH_XML = "withXml";
+    public static final String WITH_XML_DESC = "whether to include support for application/xml content type and include XML annotations in the model";
 }

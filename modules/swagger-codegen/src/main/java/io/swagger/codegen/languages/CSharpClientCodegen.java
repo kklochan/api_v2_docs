@@ -18,6 +18,7 @@ public class CSharpClientCodegen extends AbstractCSharpCodegen {
     private static final String NET35 = "v3.5";
     private static final String NETSTANDARD = "v5.0";
     private static final String UWP = "uwp";
+    private static final String WITH_XML = "withXml";
 
     protected String packageGuid = "{" + java.util.UUID.randomUUID().toString().toUpperCase() + "}";
     protected String clientPackage = "IO.Swagger.Client";
@@ -33,6 +34,7 @@ public class CSharpClientCodegen extends AbstractCSharpCodegen {
     protected boolean generatePropertyChanged = Boolean.FALSE;
     protected Map<Character, String> regexModifiers;
     protected final Map<String, String> frameworks;
+    protected boolean withXml = Boolean.FALSE;
 
     // By default, generated code is considered public
     protected boolean nonPublicApi = Boolean.FALSE;
@@ -142,6 +144,10 @@ public class CSharpClientCodegen extends AbstractCSharpCodegen {
         addSwitch(CodegenConstants.NETCORE_PROJECT_FILE,
                 CodegenConstants.NETCORE_PROJECT_FILE_DESC,
                 this.netCoreProjectFileFlag);
+
+        addSwitch(CodegenConstants.WITH_XML,
+                CodegenConstants.WITH_XML_DESC,
+                this.withXml);
 
         regexModifiers = new HashMap<Character, String>();
         regexModifiers.put('i', "IgnoreCase");
@@ -292,6 +298,11 @@ public class CSharpClientCodegen extends AbstractCSharpCodegen {
             binRelativePath += "..\\";
         binRelativePath += "vendor";
         additionalProperties.put("binRelativePath", binRelativePath);
+
+        if (additionalProperties.containsKey(WITH_XML)) {
+            this.setWithXml(Boolean.valueOf(additionalProperties.get(WITH_XML).toString()));
+        }
+        additionalProperties.put(WITH_XML, withXml);
 
         supportingFiles.add(new SupportingFile("IApiAccessor.mustache",
                 clientPackageDir, "IApiAccessor.cs"));
@@ -731,6 +742,10 @@ public class CSharpClientCodegen extends AbstractCSharpCodegen {
 
     public void setNonPublicApi(final boolean nonPublicApi) {
         this.nonPublicApi = nonPublicApi;
+    }
+
+    public void setWithXml(boolean withXml) {
+        this.withXml = withXml;
     }
 
     @Override
