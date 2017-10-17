@@ -1,0 +1,4 @@
+{
+    "library": "jaxrs-spec",
+    "artifactId": "swagger-petstore-jaxrs-spec"
+}
