@@ -57,11 +57,6 @@ before_install:
   - mkdir -p ~/.local/bin
   - export PATH=$HOME/.local/bin:$PATH
   - travis_retry curl --insecure -L https://www.stackage.org/stack/osx-x86_64 | tar xz --strip-components=1 --include '*/stack' -C ~/.local/bin
-  # start local petstore server
-  - git clone -b docker --single-branch https://github.com/wing328/swagger-samples
-  - cd swagger-samples/java/java-jersey-jaxrs
-  - sudo mvn jetty:run &
-  - cd $SW
   # NOTE: iOS build not support docker at the moment
   # to run petstore server locally via docker
   #- docker pull swaggerapi/petstore
@@ -88,7 +83,12 @@ install:
   # Add Godeps dependencies to GOPATH and PATH
    - eval "$(curl -sL https://raw.githubusercontent.com/travis-ci/gimme/master/gimme | GIMME_GO_VERSION=1.4 bash)"
    - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace"
-   - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+   - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH
+  # start local petstore server
+  - git clone -b docker --single-branch https://github.com/wing328/swagger-samples
+  - cd swagger-samples/java/java-jersey-jaxrs
+  - sudo mvn jetty:run &
+  - cd $SW
 
 script:
   # fail fast
