@@ -20,6 +20,9 @@ build:
     - sudo apt-get install elixir
     - elixir --version
     - mix --version
+    # install ts
+    - npm install -g typescript
+    - npm install -g npm
     # test samples defined in pom.xml
     - cp pom.xml.shippable pom.xml
     - mvn verify -P samples
