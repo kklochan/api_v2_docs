@@ -838,6 +838,9 @@
             </activation>
             <modules>
                 <!-- clients -->
+                <module>samples/client/petstore/typescript-angular-v2/npm</module>
+                <module>samples/client/petstore/typescript-angular-v4/npm</module>
+                <module>samples/client/petstore/typescript-angular-v4.3/npm</module>
                 <module>samples/client/petstore/elixir</module>
                 <module>samples/client/petstore/haskell-http-client</module>
             </modules>
