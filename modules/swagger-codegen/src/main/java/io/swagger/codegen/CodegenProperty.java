@@ -42,7 +42,9 @@ public class CodegenProperty implements Cloneable, VendorExtendable {
     public Map<String, Object> allowableValues;
     public CodegenProperty items;
     public Map<String, Object> vendorExtensions = new HashMap<>();
-
+    public boolean hasValidation; // true if pattern, maximum, etc are set (only used in the mustache template)
+    public boolean isInherited;
+    public String discriminatorValue;
     public String nameInCamelCase; // property name in camel case
     // enum name based on the property name, usually use as a prefix (e.g. VAR_NAME) for enum name (e.g. VAR_NAME_VALUE1)
     public String enumName;
@@ -410,6 +412,25 @@ public class CodegenProperty implements Cloneable, VendorExtendable {
         result = prime * result + ((setter == null) ? 0 : setter.hashCode());
         result = prime * result + ((unescapedDescription == null) ? 0 : unescapedDescription.hashCode());
         result = prime * result + ((vendorExtensions == null) ? 0 : vendorExtensions.hashCode());
+        result = prime * result + ((hasValidation  ? 13:31));
+        result = prime * result + ((isString  ? 13:31));
+        result = prime * result + ((isNumeric ? 13:31));
+        result = prime * result + ((isInteger ? 13:31));
+        result = prime * result + ((isLong  ?13:31));
+        result = prime * result + ((isNumber ? 13:31));
+        result = prime * result + ((isFloat ? 13:31));
+        result = prime * result + ((isDouble  ? 13:31));
+        result = prime * result + ((isByteArray  ? 13:31));
+        result = prime * result + ((isBinary  ? 13:31));
+        result = prime * result + ((isFile  ? 13:31));
+        result = prime * result + ((isBoolean  ? 13:31));
+        result = prime * result + ((isDate  ? 13:31));
+        result = prime * result + ((isDateTime ? 13:31));
+        result = prime * result + ((isUuid ? 13:31));
+        result = prime * result + ((isMapContainer ? 13:31));
+        result = prime * result + ((isListContainer  ? 13:31));
+        result = prime * result + Objects.hashCode(isInherited);
+        result = prime * result + Objects.hashCode(discriminatorValue);
         result = prime * result + Objects.hashCode(nameInCamelCase);
         result = prime * result + Objects.hashCode(enumName);
         result = prime * result + ((maxItems == null) ? 0 : maxItems.hashCode());
@@ -515,6 +536,66 @@ public class CodegenProperty implements Cloneable, VendorExtendable {
         }
 
         if (this.vendorExtensions != other.vendorExtensions && (this.vendorExtensions == null || !this.vendorExtensions.equals(other.vendorExtensions))) {
+            return false;
+        }
+
+        if (this.hasValidation != other.hasValidation) {
+            return false;
+        }
+
+        if (this.isString != other.isString) {
+            return false;
+        }
+
+        if (this.isNumeric != other.isNumeric) {
+            return false;
+        }
+        if (this.isInteger != other.isInteger) {
+            return false;
+        }
+        if (this.isLong != other.isLong) {
+            return false;
+        }
+        if (this.isNumber != other.isNumber) {
+            return false;
+        }
+        if (this.isFloat != other.isFloat) {
+            return false;
+        }
+        if (this.isDouble != other.isDouble) {
+            return false;
+        }
+        if (this.isByteArray != other.isByteArray) {
+            return false;
+        }
+        if (this.isBoolean != other.isBoolean) {
+            return false;
+        }
+        if (this.isDate != other.isDate) {
+            return false;
+        }
+        if (this.isDateTime != other.isDateTime) {
+            return false;
+        }
+        if (this.isUuid != other.isUuid) {
+            return false;
+        }
+        if (this.isBinary != other.isBinary) {
+            return false;
+        }
+        if (this.isFile != other.isFile) {
+            return false;
+        }
+        if (this.isListContainer != other.isListContainer) {
+            return false;
+        }
+        if (this.isMapContainer != other.isMapContainer) {
+            return false;
+        }
+        if (!Objects.equals(this.isInherited, other.isInherited)) {
+            return false;
+        }
+        if (!Objects.equals(this.discriminatorValue, other.discriminatorValue)) {
             return false;
         }
         if (!Objects.equals(this.nameInCamelCase, other.nameInCamelCase)) {
